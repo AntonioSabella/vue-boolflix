@@ -18,11 +18,11 @@
       </div>
     </div>
     <div class="mostra_lista">
-      <ul>
-        <li>Titolo: </li>
-        <li>Titolo originale: </li>
-        <li>Lingua: </li>
-        <li>Voto: </li>
+      <ul v-for='movie in movies' :key='movie.id'>
+        <li>Titolo: {{movie.title}} </li>
+        <li>Titolo originale: {{movie.original_title}} </li>
+        <li>Lingua: {{movie.original_language}}</li>
+        <li>Voto: {{movie.vote_average}} </li>
       </ul>
     </div>
   </div>
@@ -48,13 +48,14 @@ export default {
   methods: {
     searchMovie() {
       console.log('...Ricerca');
+      console.log(this.searchText);
     },
     callApi() {
       axios.get(this.url).then(response => {
         console.log(this);
         console.log(response);
 
-        this.movies = response.data.response
+        this.movies = response.data.results
       })
       .catch(error => {
         console.log(error);
@@ -79,6 +80,16 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+ul {
+  line-height: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.mostra_lista {
+  margin: 2rem;
+  padding: 1rem;
 }
 
 .container {
