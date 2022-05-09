@@ -21,8 +21,9 @@
       <ul v-for='movie in movies' :key='movie.id'>
         <li>Titolo: {{movie.title}} </li>
         <li>Titolo originale: {{movie.original_title}} </li>
-        <li>Lingua: {{movie.original_language}}</li>
+        <li>Lingua: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></li>
         <li>Voto: {{Math.ceil(movie.vote_average)}} </li>
+       
       </ul>
     </div>
   </div>
@@ -55,6 +56,13 @@ export default {
       .catch(error => {
         console.log(error);
       })
+    },
+    languageFlag(flagspeak){
+      if(flagspeak === 'en'){
+        return flagspeak = 'gb'
+      } else {
+        return flagspeak
+      }
     }
   }, 
   mounted() {
