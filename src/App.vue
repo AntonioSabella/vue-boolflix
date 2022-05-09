@@ -18,11 +18,23 @@
       </div>
     </div>
     <div class="mostra_lista">
+       <h2>Film:</h2>
+
       <ul v-for='movie in movies' :key='movie.id'>
         <li>Titolo: {{movie.title}} </li>
         <li>Titolo originale: {{movie.original_title}} </li>
         <li>Lingua: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></li>
         <li>Voto: {{Math.ceil(movie.vote_average)}} </li>
+       
+      </ul>
+    </div>
+     <div class="mostra_lista">
+       <h2>Serie Tv:</h2>
+      <ul v-for='show in shows' :key='show.id'>
+        <li>Titolo: {{show.name}} </li>
+        <li>Titolo originale: {{show.original_name}} </li>
+        <li>Lingua: {{show.original_language}}  <flag :iso="languageFlag(show.original_language)" /></li>
+        <li>Voto: {{Math.ceil(show.vote_average)}} </li>
        
       </ul>
     </div>
@@ -40,17 +52,29 @@ export default {
   data() {
     return {
       url:'https://api.themoviedb.org/3/search/movie?api_key=dab9404e3203e7f2da900e8cf30bd5e8&language=it-IT&page=1&include_adult=false&query=?',
-      movies: null,
-      error: null,
+      urlTv: 'https://api.themoviedb.org/3/search/tv?api_key=dab9404e3203e7f2da900e8cf30bd5e8&language=it-IT&page=1&include_adult=false&query=?',
       searchMovie: '',
+      movies: null,
+      shows: null,
+      error: null,
     };
   },
   methods: {
     callMovieApi(){
       axios.get(this.url + this.searchMovie).then(response => {
-        //console.log(this);
-        //console.log(response);
+        console.log(this);
+        console.log(response);
         this.movies = response.data.results
+        this.searchMovie= ''
+      })
+      .catch(error => {
+        console.log(error);
+      }),
+
+       axios.get(this.urlTv + this.searchMovie).then(response => {
+        console.log(this);
+        console.log(response);
+        this.shows = response.data.results
         this.searchMovie= ''
       })
       .catch(error => {
@@ -88,6 +112,7 @@ export default {
 ul {
   line-height: 1.5rem;
   margin-bottom: 1rem;
+  background-color: coral;
 }
 
 .mostra_lista {
