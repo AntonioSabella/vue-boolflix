@@ -8,10 +8,10 @@
           </div>
         </div>
         <div class="col d_flex">
-          <form action="">
+          <form action="" autocomplete="off">
             <label for="search">Cerca il tuo film preferito:</label>
-            <input class="search_bar" type="text" id="search" name="search" placeholder="Inserisci un film" v-model='searchText'>
-            <button @click.prevent='searchMovie' class="btn">Cliccami Guascone</button>
+            <input class="search_bar" type="text" id="search" name="search" placeholder="Inserisci un film" v-model='searchMovie'>
+            <button @click.prevent="callMovieApi" class="btn">Cliccami Guascone</button>
           </form>
          
         </div>
@@ -38,24 +38,19 @@ export default {
   },
   data() {
     return {
-      url: "https://api.themoviedb.org/3/search/movie?api_key=dab9404e3203e7f2da900e8cf30bd5e8&language=en-US&page=1&include_adult=false&query=ritorno al futuro",
+      url:'https://api.themoviedb.org/3/search/movie?api_key=dab9404e3203e7f2da900e8cf30bd5e8&language=it-IT&page=1&include_adult=false&query=?',
       movies: null,
-      loading: true,
       error: null,
-      searchText: '',
+      searchMovie: '',
     };
   },
   methods: {
-    searchMovie() {
-      console.log('...Ricerca');
-      console.log(this.searchText);
-    },
-    callApi() {
-      axios.get(this.url).then(response => {
-        console.log(this);
-        console.log(response);
-
+    callMovieApi(){
+      axios.get(this.url + this.searchMovie).then(response => {
+        //console.log(this);
+        //console.log(response);
         this.movies = response.data.results
+        this.searchMovie= ''
       })
       .catch(error => {
         console.log(error);
@@ -63,7 +58,7 @@ export default {
     }
   }, 
   mounted() {
-    this.callApi();
+    this.callMovieApi();
   },
 
 }
