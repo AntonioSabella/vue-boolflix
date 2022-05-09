@@ -22,7 +22,7 @@
         <li>Titolo: {{movie.title}} </li>
         <li>Titolo originale: {{movie.original_title}} </li>
         <li>Lingua: {{movie.original_language}}</li>
-        <li>Voto: {{movie.vote_average}} </li>
+        <li>Voto: {{Math.ceil(movie.vote_average)}} </li>
       </ul>
     </div>
   </div>
