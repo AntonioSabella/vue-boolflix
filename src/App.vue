@@ -21,6 +21,7 @@
        <h2>Film:</h2>
 
       <ul v-for='movie in movies' :key='movie.id'>
+        <li><img :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt=""></li>
         <li>Titolo: {{movie.title}} </li>
         <li>Titolo originale: {{movie.original_title}} </li>
         <li>Lingua: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></li>
@@ -31,6 +32,7 @@
      <div class="mostra_lista">
        <h2>Serie Tv:</h2>
       <ul v-for='show in shows' :key='show.id'>
+        <li><img :src="'https://image.tmdb.org/t/p/w342/' + show.poster_path" alt=""></li>
         <li>Titolo: {{show.name}} </li>
         <li>Titolo originale: {{show.original_name}} </li>
         <li>Lingua: {{show.original_language}}  <flag :iso="languageFlag(show.original_language)" /></li>
