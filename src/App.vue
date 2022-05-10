@@ -28,7 +28,17 @@
         <li>Titolo: {{movie.title}} </li>
         <li>Titolo originale: {{movie.original_title}} </li>
         <li>Lingua: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></li>
-        <li>Voto: {{Math.ceil((movie.vote_average) / 2)}} </li>
+        <li>Voto: {{Math.ceil(parseInt(movie.vote_average) / 2)}} </li>
+        <div class="starsVote d-flex">
+          <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 1 ? 'star_show' : 'star_standard'"/>
+          <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 3 ? 'star_show' : 'star_standard'"/>
+          <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 5 ? 'star_show' : 'star_standard'"/>
+          <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 7 ? 'star_show' : 'star_standard'"/>
+          <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 9 ? 'star_show' : 'star_standard'"/>
+        </div>
+       
+
+       
        
       </ul>
     </div>
@@ -42,7 +52,14 @@
         <li>Titolo: {{show.name}} </li>
         <li>Titolo originale: {{show.original_name}} </li>
         <li>Lingua: {{show.original_language}}  <flag :iso="languageFlag(show.original_language)" /></li>
-        <li>Voto: {{Math.ceil((show.vote_average) / 2)}} </li>
+        <li>Voto: {{Math.ceil(parseInt(show.vote_average) / 2)}} </li>
+        <div class="starsVote d-flex">
+          <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 1 ? 'star_show' : 'star_standard'"/>
+          <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 3 ? 'star_show' : 'star_standard'"/>
+          <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 5 ? 'star_show' : 'star_standard'"/>
+          <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 7 ? 'star_show' : 'star_standard'"/>
+          <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 9 ? 'star_show' : 'star_standard'"/>
+        </div>
        
       </ul>
     </div>
@@ -158,7 +175,19 @@ ul {
   cursor: pointer;
 }
 
+.star_standard {
+  color: gray;
+}
+
+.star_show {
+  color: yellow;
+}
+
 /* Utilities */
+.d-flex {
+  display: flex;
+}
+
 .d_flex {
   display: flex;
   align-items: center;
