@@ -11,7 +11,7 @@
           <form action="" autocomplete="off">
             <label for="search">Cerca il tuo film preferito:</label>
             <input class="search_bar" type="text" id="search" name="search" placeholder="Inserisci un film" v-model='searchMovie'>
-            <button @click.prevent="callMovieApi" class="btn">Cliccami Guascone</button>
+            <button @click.prevent="callMyApi" class="btn">Cliccami Guascone</button>
           </form>
          
         </div>
@@ -21,22 +21,28 @@
        <h2>Film:</h2>
 
       <ul v-for='movie in movies' :key='movie.id'>
-        <li><img :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt=""></li>
+        <li>
+          <img v-if="movie.poster_path == null" src="https://picsum.photos/342/500" alt="" >
+          <img v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
+        </li>
         <li>Titolo: {{movie.title}} </li>
         <li>Titolo originale: {{movie.original_title}} </li>
         <li>Lingua: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></li>
-        <li>Voto: {{Math.ceil(movie.vote_average)}} </li>
+        <li>Voto: {{Math.ceil((movie.vote_average) / 2)}} </li>
        
       </ul>
     </div>
      <div class="mostra_lista">
        <h2>Serie Tv:</h2>
       <ul v-for='show in shows' :key='show.id'>
-        <li><img :src="'https://image.tmdb.org/t/p/w342/' + show.poster_path" alt=""></li>
+        <li>
+          <img v-if="show.poster_path == null" src="https://picsum.photos/342/500" alt="">
+          <img v-else :src="'https://image.tmdb.org/t/p/w342/' + show.poster_path" alt="">
+        </li>
         <li>Titolo: {{show.name}} </li>
         <li>Titolo originale: {{show.original_name}} </li>
         <li>Lingua: {{show.original_language}}  <flag :iso="languageFlag(show.original_language)" /></li>
-        <li>Voto: {{Math.ceil(show.vote_average)}} </li>
+        <li>Voto: {{Math.ceil((show.vote_average) / 2)}} </li>
        
       </ul>
     </div>
@@ -62,7 +68,7 @@ export default {
     };
   },
   methods: {
-    callMovieApi(){
+    callMyApi(){
       axios.get(this.url + this.searchMovie).then(response => {
         console.log(this);
         console.log(response);
@@ -89,10 +95,10 @@ export default {
       } else {
         return flagspeak
       }
-    }
+    },
   }, 
   mounted() {
-    this.callMovieApi();
+    this.callMyApi();
   },
 
 }
