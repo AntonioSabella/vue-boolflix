@@ -11,9 +11,9 @@
               </div>
               <div class="col d-flex justify-content-end">
                   <form action="" autocomplete="off">
-                        <label class="text-white me-3" for="search">Cerca il tuo contenuto preferito:</label>
+                        <!-- <label class="text-white me-3" for="search">Cerca il tuo contenuto preferito:</label> -->
                         <input class="search_bar border-light border_radius_05 bg-dark" type="text" id="search" name="search" placeholder="Inserisci film o serie" v-model='searchMovie'>
-                        <button :disabled='searchMovie.length < 1' @click.prevent="callMyApi" class="btn border_radius_05">Cerca</button>
+                        <button :disabled='searchMovie.length < 1' @click.prevent="callMyApi" class="btn border_radius_05 bg-dark">Cerca</button>
                   </form>
               </div>
             </div>
@@ -21,17 +21,17 @@
       </nav>
     </header>
 
-    <main id="site_main">
-         <div class="mostra_lista">
+    <main id="site_main mb-3">
+         <div class="mostra_lista pb-4">
              <div class="container">
-               <h2 class="text-white text-center">Film</h2>
-               <div class="row row-cols-3 gy-4">
+               <h2 class="text-center">Film</h2>
+               <div class="row row-cols-4 gy-4">
                  <div class="col" v-for='movie in movies' :key='movie.id'>
-                   <div class="card fixed_height">
+                   <div class="card">
                      <img v-if="movie.poster_path == null" src="https://picsum.photos/342/500" alt="" >
                      <img v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
                    </div>
-                   <div class="text fixed_height">
+                   <div class="text">
                       <div class="title"><strong>Titolo</strong>: {{movie.title}} </div>
                       <div class="original_title"><strong>Titolo originale</strong>: {{movie.original_title}} </div>
                       <div class="language"><strong>Lingua</strong>: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></div>
@@ -49,16 +49,16 @@
                </div>
              </div>
          </div>
-         <div class="mostra_lista">
+         <div class="mostra_lista pb-4">
               <div class="container">
-                <h2 class="text-white text-center">Serie Tv</h2>
-               <div class="row row-cols-3 gy-4">
+                <h2 class="text-center">Serie Tv</h2>
+               <div class="row row-cols-4 gy-4">
                  <div class="col" v-for='show in shows' :key='show.id'>
-                   <div class="card fixed_height">
+                   <div class="card">
                      <img v-if="show.poster_path == null" src="https://picsum.photos/342/500" alt="" >
                      <img v-else :src="'https://image.tmdb.org/t/p/w342/' + show.poster_path" alt="">
                    </div>
-                   <div class="text fixed_height">
+                   <div class="text">
                       <div class="title"><strong>Titolo</strong>: {{show.name}} </div>
                       <div class="original_title"><strong>Titolo originale</strong>: {{show.original_name}} </div>
                       <div class="language"><strong>Lingua</strong>: {{show.original_language}}  <flag :iso="languageFlag(show.original_language)" /></div>
