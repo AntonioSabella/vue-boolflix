@@ -27,11 +27,11 @@
              <div class="container">
                <div class="row row-cols-3 gy-3">
                  <div class="col" v-for='movie in movies' :key='movie.id'>
-                   <div class="card">
+                   <div class="card fixed_height">
                      <img v-if="movie.poster_path == null" src="https://picsum.photos/342/500" alt="" >
                      <img v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
                    </div>
-                   <div class="text">
+                   <div class="text fixed_height">
                       <div class="title">Titolo: {{movie.title}} </div>
                       <div class="original_title">Titolo originale: {{movie.original_title}} </div>
                       <div class="language">Lingua: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></div>
