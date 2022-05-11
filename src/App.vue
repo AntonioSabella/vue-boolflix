@@ -3,7 +3,7 @@
     <header id="site_header">
       <nav id="site_nav" class="py_1">
         <div class="container-fluid bg_black">
-            <div class="row row-cols-2 align-items-center">
+            <div class="row row-cols-2 align-items-center h-100 flex-nowrap">
               <div class="col">
                       <div class="logo">
                         <img src="@/assets/img/giovannielloflix.png" alt="">
@@ -25,13 +25,13 @@
          <div class="mostra_lista pb-4">
              <div class="container">
                <h2 class="text-center">Film</h2>
-               <div class="row row-cols-4 gy-4">
+               <div class="row row-cols-4 gy-4 py-2 h-100 flex-nowrap overflow-auto">
                  <div class="col" v-for='movie in movies' :key='movie.id'>
-                   <div class="card">
-                     <img v-if="movie.poster_path == null" src="https://picsum.photos/342/500" alt="" >
-                     <img v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
+                   <div class="card fixed_height">
+                     <img class="fixed_height" v-if="movie.poster_path == null" src="https://picsum.photos/342/" alt="" >
+                     <img class="fixed_height" v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
                    </div>
-                   <div class="text">
+                   <div class="text fixed_height">
                       <div class="title"><strong>Titolo</strong>: {{movie.title}} </div>
                       <div class="original_title"><strong>Titolo originale</strong>: {{movie.original_title}} </div>
                       <div class="language"><strong>Lingua</strong>: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></div>
@@ -52,11 +52,11 @@
          <div class="mostra_lista pb-4">
               <div class="container">
                 <h2 class="text-center">Serie Tv</h2>
-               <div class="row row-cols-4 gy-4">
+               <div class="row row-cols-4 gy-4 py-2 flex-nowrap overflow-auto">
                  <div class="col" v-for='show in shows' :key='show.id'>
-                   <div class="card">
-                     <img v-if="show.poster_path == null" src="https://picsum.photos/342/500" alt="" >
-                     <img v-else :src="'https://image.tmdb.org/t/p/w342/' + show.poster_path" alt="">
+                   <div class="card fixed_height">
+                     <img class="fixed_height" v-if="show.poster_path == null" src="https://picsum.photos/342/515" alt="" >
+                     <img class="fixed_height" v-else :src="'https://image.tmdb.org/t/p/w342/' + show.poster_path" alt="">
                    </div>
                    <div class="text">
                       <div class="title"><strong>Titolo</strong>: {{show.name}} </div>
