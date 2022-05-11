@@ -4,7 +4,7 @@
 
 body {
     background-color: black;
-    overflow: auto;
+    overflow: hidden;
 }
 
 header {
@@ -29,16 +29,16 @@ header {
 
   main {
       background-color: black;
-      min-height: calc(100% - 55px);
-      overflow-y:visible;  
+      max-height: calc(100vh - 55px); 
+      overflow:auto;
       &::-webkit-scrollbar {
         width: 10px; 
         border-radius: 0.5rem; 
       }
-    &::-webkit-scrollbar-track {
+      &::-webkit-scrollbar-track {
         background: cornflowerblue;  
     }
-    &::-webkit-scrollbar-thumb{
+      &::-webkit-scrollbar-thumb{
         background-color: blue;  
         border-radius: 0.5rem;     
     }
