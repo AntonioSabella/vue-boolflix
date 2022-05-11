@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <header id="site_header">
-      <nav id="site_nav">
-        <div class="container-fluid bg-dark">
+      <nav id="site_nav" class="py_1">
+        <div class="container-fluid bg_black">
             <div class="row row-cols-2 align-items-center">
               <div class="col">
                       <div class="logo">
@@ -13,7 +13,7 @@
                   <form action="" autocomplete="off">
                         <label class="text-white me-3" for="search">Cerca il tuo contenuto preferito:</label>
                         <input class="search_bar border-light border_radius_05 bg-dark" type="text" id="search" name="search" placeholder="Inserisci film o serie" v-model='searchMovie'>
-                        <button @click.prevent="callMyApi" class="btn border_radius_05">Cerca</button>
+                        <button :disabled='searchMovie.length < 1' @click.prevent="callMyApi" class="btn border_radius_05">Cerca</button>
                   </form>
               </div>
             </div>
@@ -23,19 +23,19 @@
 
     <main id="site_main">
          <div class="mostra_lista">
-             <h2>Film:</h2>
              <div class="container">
-               <div class="row row-cols-3 gy-3">
+               <h2 class="text-white text-center">Film</h2>
+               <div class="row row-cols-3 gy-4">
                  <div class="col" v-for='movie in movies' :key='movie.id'>
                    <div class="card fixed_height">
                      <img v-if="movie.poster_path == null" src="https://picsum.photos/342/500" alt="" >
                      <img v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
                    </div>
                    <div class="text fixed_height">
-                      <div class="title">Titolo: {{movie.title}} </div>
-                      <div class="original_title">Titolo originale: {{movie.original_title}} </div>
-                      <div class="language">Lingua: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></div>
-                      <div class="vote">Voto: {{Math.ceil(parseInt(movie.vote_average) / 2)}} </div>
+                      <div class="title"><strong>Titolo</strong>: {{movie.title}} </div>
+                      <div class="original_title"><strong>Titolo originale</strong>: {{movie.original_title}} </div>
+                      <div class="language"><strong>Lingua</strong>: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></div>
+                      <div class="vote"><strong>Voto</strong>: {{Math.ceil(parseInt(movie.vote_average) / 2)}} </div>
                       <div class="starsVote d-flex">
                         <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 1 ? 'star_show' : 'star_standard'"/>
                         <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 3 ? 'star_show' : 'star_standard'"/>
@@ -43,59 +43,44 @@
                         <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 7 ? 'star_show' : 'star_standard'"/>
                         <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 9 ? 'star_show' : 'star_standard'"/>
                       </div>
-                      <div class="overview"> Overview: {{movie.overview}}</div>
+                      <div class="overview"><strong>Trama</strong>: {{movie.overview}}</div>
                    </div>
                  </div>
                </div>
              </div>
-
-<!--               <ul v-for='movie in movies' :key='movie.id'>
-                <li>
-                  <img v-if="movie.poster_path == null" src="https://picsum.photos/342/500" alt="" >
-                  <img v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
-                </li>
-                <li>Titolo: {{movie.title}} </li>
-                <li>Titolo originale: {{movie.original_title}} </li>
-                <li>Lingua: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></li>
-                <li>Voto: {{Math.ceil(parseInt(movie.vote_average) / 2)}} </li>
-                <div class="starsVote d-flex">
-                  <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 1 ? 'star_show' : 'star_standard'"/>
-                  <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 3 ? 'star_show' : 'star_standard'"/>
-                  <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 5 ? 'star_show' : 'star_standard'"/>
-                  <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 7 ? 'star_show' : 'star_standard'"/>
-                  <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 9 ? 'star_show' : 'star_standard'"/>
-                </div>
-              
-
-              
-              
-              </ul> -->
          </div>
+         <div class="mostra_lista">
+              <div class="container">
+                <h2 class="text-white text-center">Serie Tv</h2>
+               <div class="row row-cols-3 gy-4">
+                 <div class="col" v-for='show in shows' :key='show.id'>
+                   <div class="card fixed_height">
+                     <img v-if="show.poster_path == null" src="https://picsum.photos/342/500" alt="" >
+                     <img v-else :src="'https://image.tmdb.org/t/p/w342/' + show.poster_path" alt="">
+                   </div>
+                   <div class="text fixed_height">
+                      <div class="title"><strong>Titolo</strong>: {{show.name}} </div>
+                      <div class="original_title"><strong>Titolo originale</strong>: {{show.original_name}} </div>
+                      <div class="language"><strong>Lingua</strong>: {{show.original_language}}  <flag :iso="languageFlag(show.original_language)" /></div>
+                      <div class="vote"><strong>Voto</strong>: {{Math.ceil(parseInt(show.vote_average) / 2)}} </div>
+                      <div class="starsVote d-flex">
+                        <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 1 ? 'star_show' : 'star_standard'"/>
+                        <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 3 ? 'star_show' : 'star_standard'"/>
+                        <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 5 ? 'star_show' : 'star_standard'"/>
+                        <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 7 ? 'star_show' : 'star_standard'"/>
+                        <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 9 ? 'star_show' : 'star_standard'"/>
+                      </div>
+                      <div class="overview"><strong>Trama</strong>: {{show.overview}}</div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+         </div>
+
     </main>
     
 
 
-     <div class="mostra_lista">
-       <h2>Serie Tv:</h2>
-      <ul v-for='show in shows' :key='show.id'>
-        <li>
-          <img v-if="show.poster_path == null" src="https://picsum.photos/342/500" alt="">
-          <img v-else :src="'https://image.tmdb.org/t/p/w342/' + show.poster_path" alt="">
-        </li>
-        <li>Titolo: {{show.name}} </li>
-        <li>Titolo originale: {{show.original_name}} </li>
-        <li>Lingua: {{show.original_language}}  <flag :iso="languageFlag(show.original_language)" /></li>
-        <li>Voto: {{Math.ceil(parseInt(show.vote_average) / 2)}} </li>
-        <div class="starsVote d-flex">
-          <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 1 ? 'star_show' : 'star_standard'"/>
-          <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 3 ? 'star_show' : 'star_standard'"/>
-          <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 5 ? 'star_show' : 'star_standard'"/>
-          <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 7 ? 'star_show' : 'star_standard'"/>
-          <font-awesome-icon icon="fa-solid fa-star" :class="show.vote_average >= 9 ? 'star_show' : 'star_standard'"/>
-        </div>
-       
-      </ul>
-    </div>
   </div>
 </template>
 
