@@ -1,0 +1,106 @@
+@import '~/node_modules/bootstrap/scss/bootstrap.scss';
+
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  ul {
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+    background-color: coral;
+  }
+
+  img {
+      max-width: 100%;
+  }
+  
+  .mostra_lista {
+    margin: 2rem;
+    padding: 1rem;
+  }
+
+  .col:hover .card {
+    display: none;
+    }
+
+  .text {
+    display: none;
+  }
+
+  .col:hover .text {
+    display: block;
+  }
+  
+/*   .container {
+    padding: 2rem;
+    margin: auto;
+    text-align: center;
+    max-width: 100%;
+    height: 100px;
+    background-color: black;
+    .row{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  } */
+
+  label {
+    font-size: 13px;
+  }
+  
+  .search_bar {
+    padding: 0.4rem 0.6rem;
+    margin-right: 0.5rem;
+    color: white;
+    &::placeholder {
+        color: white;
+        font-size: 13px;
+    }
+  }
+  
+  .btn {
+    background-color: gainsboro;
+    color: black;
+    border: 2px solid transparent;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    transition: 500ms;
+    &.btn:hover {
+        border: 2px solid red;
+        color: red;
+    }
+  }
+  
+  .star_standard {
+    color: gray;
+  }
+  
+  .star_show {
+    color: yellow;
+  }
+  
+  /* Utilities */
+  .border_radius_05 {
+      border-radius: 1rem;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+  
+  .d_flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }

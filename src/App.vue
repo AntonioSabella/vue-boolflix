@@ -1,47 +1,79 @@
 <template>
   <div id="app">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="logo">
-            <img src="@/assets/img/giovannielloflix.png" alt="">
-          </div>
+    <header id="site_header">
+      <nav id="site_nav">
+        <div class="container-fluid bg-dark">
+            <div class="row row-cols-2 align-items-center">
+              <div class="col">
+                      <div class="logo">
+                        <img src="@/assets/img/giovannielloflix.png" alt="">
+                      </div>
+              </div>
+              <div class="col d-flex justify-content-end">
+                  <form action="" autocomplete="off">
+                        <label class="text-white me-3" for="search">Cerca il tuo contenuto preferito:</label>
+                        <input class="search_bar border-light border_radius_05 bg-dark" type="text" id="search" name="search" placeholder="Inserisci film o serie" v-model='searchMovie'>
+                        <button @click.prevent="callMyApi" class="btn border_radius_05">Cerca</button>
+                  </form>
+              </div>
+            </div>
         </div>
-        <div class="col d_flex">
-          <form action="" autocomplete="off">
-            <label for="search">Cerca il tuo film preferito:</label>
-            <input class="search_bar" type="text" id="search" name="search" placeholder="Inserisci un film" v-model='searchMovie'>
-            <button @click.prevent="callMyApi" class="btn">Cliccami Guascone</button>
-          </form>
-         
-        </div>
-      </div>
-    </div>
-    <div class="mostra_lista">
-       <h2>Film:</h2>
+      </nav>
+    </header>
 
-      <ul v-for='movie in movies' :key='movie.id'>
-        <li>
-          <img v-if="movie.poster_path == null" src="https://picsum.photos/342/500" alt="" >
-          <img v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
-        </li>
-        <li>Titolo: {{movie.title}} </li>
-        <li>Titolo originale: {{movie.original_title}} </li>
-        <li>Lingua: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></li>
-        <li>Voto: {{Math.ceil(parseInt(movie.vote_average) / 2)}} </li>
-        <div class="starsVote d-flex">
-          <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 1 ? 'star_show' : 'star_standard'"/>
-          <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 3 ? 'star_show' : 'star_standard'"/>
-          <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 5 ? 'star_show' : 'star_standard'"/>
-          <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 7 ? 'star_show' : 'star_standard'"/>
-          <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 9 ? 'star_show' : 'star_standard'"/>
-        </div>
-       
+    <main id="site_main">
+         <div class="mostra_lista">
+             <h2>Film:</h2>
+             <div class="container">
+               <div class="row row-cols-3 gy-3">
+                 <div class="col" v-for='movie in movies' :key='movie.id'>
+                   <div class="card">
+                     <img v-if="movie.poster_path == null" src="https://picsum.photos/342/500" alt="" >
+                     <img v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
+                   </div>
+                   <div class="text">
+                      <div class="title">Titolo: {{movie.title}} </div>
+                      <div class="original_title">Titolo originale: {{movie.original_title}} </div>
+                      <div class="language">Lingua: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></div>
+                      <div class="vote">Voto: {{Math.ceil(parseInt(movie.vote_average) / 2)}} </div>
+                      <div class="starsVote d-flex">
+                        <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 1 ? 'star_show' : 'star_standard'"/>
+                        <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 3 ? 'star_show' : 'star_standard'"/>
+                        <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 5 ? 'star_show' : 'star_standard'"/>
+                        <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 7 ? 'star_show' : 'star_standard'"/>
+                        <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 9 ? 'star_show' : 'star_standard'"/>
+                      </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
 
-       
-       
-      </ul>
-    </div>
+<!--               <ul v-for='movie in movies' :key='movie.id'>
+                <li>
+                  <img v-if="movie.poster_path == null" src="https://picsum.photos/342/500" alt="" >
+                  <img v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
+                </li>
+                <li>Titolo: {{movie.title}} </li>
+                <li>Titolo originale: {{movie.original_title}} </li>
+                <li>Lingua: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></li>
+                <li>Voto: {{Math.ceil(parseInt(movie.vote_average) / 2)}} </li>
+                <div class="starsVote d-flex">
+                  <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 1 ? 'star_show' : 'star_standard'"/>
+                  <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 3 ? 'star_show' : 'star_standard'"/>
+                  <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 5 ? 'star_show' : 'star_standard'"/>
+                  <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 7 ? 'star_show' : 'star_standard'"/>
+                  <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 9 ? 'star_show' : 'star_standard'"/>
+                </div>
+              
+
+              
+              
+              </ul> -->
+         </div>
+    </main>
+    
+
+
      <div class="mostra_lista">
        <h2>Serie Tv:</h2>
       <ul v-for='show in shows' :key='show.id'>
@@ -122,75 +154,5 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-ul {
-  line-height: 1.5rem;
-  margin-bottom: 1rem;
-  background-color: coral;
-}
-
-.mostra_lista {
-  margin: 2rem;
-  padding: 1rem;
-}
-
-.container {
-  padding: 2rem;
-  margin: auto;
-  text-align: center;
-  max-width: 100%;
-  height: 100px;
-  background-color: black;
-  .row{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-
-.search_bar {
-  padding: 0.5rem 0.8rem;
-  background-color: lightblue;
-  margin-right: 0.5rem;
-}
-
-.btn {
-  background-color: cornflowerblue;
-  color: crimson;
-  border: 1px solid red;
-  padding: 0.5rem 0.8rem;
-  cursor: pointer;
-}
-
-.star_standard {
-  color: gray;
-}
-
-.star_show {
-  color: yellow;
-}
-
-/* Utilities */
-.d-flex {
-  display: flex;
-}
-
-.d_flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+@import '@/assets/scss/style.scss';
 </style>
