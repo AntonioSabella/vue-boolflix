@@ -43,6 +43,7 @@
                         <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 7 ? 'star_show' : 'star_standard'"/>
                         <font-awesome-icon icon="fa-solid fa-star" :class="movie.vote_average >= 9 ? 'star_show' : 'star_standard'"/>
                       </div>
+                      <div class="overview"> Overview: {{movie.overview}}</div>
                    </div>
                  </div>
                </div>
