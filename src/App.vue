@@ -5,15 +5,14 @@
         <div class="container-fluid bg_black">
             <div class="row row-cols-2 align-items-center h-100 flex-nowrap">
               <div class="col">
-                      <div class="logo">
-                        <img src="@/assets/img/giovannielloflix.png" alt="">
-                      </div>
+                <LogoComponent />
+                    
               </div>
               <div class="col d-flex justify-content-end">
-                  <form action="" autocomplete="off">
+                  <form class="w-75 d-flex justify-content-end" action="" autocomplete="off" @submit.prevent="callMyApi">
                         <!-- <label class="text-white me-3" for="search">Cerca il tuo contenuto preferito:</label> -->
-                        <input class="search_bar border-light border_radius_05 bg-dark" type="text" id="search" name="search" placeholder="Inserisci film o serie" v-model='searchMovie'>
-                        <button :disabled='searchMovie.length < 1' @click.prevent="callMyApi" class="btn border_radius_05 bg-dark">Cerca</button>
+                        <input class="search_bar border-light border_radius_05 bg-dark w-80 me-3" type="text" id="search" name="search" placeholder="Inserisci film o serie" v-model='searchMovie'>
+                        <button :disabled='searchMovie.length < 1' class="btn border_radius_05 bg-dark">Cerca</button>
                   </form>
               </div>
             </div>
@@ -25,10 +24,10 @@
          <div class="mostra_lista pb-4">
              <div class="container">
                <h2 class="text-center">Film</h2>
-               <div class="row row-cols-4 gy-4 py-2 h-100 flex-nowrap overflow-auto">
+               <div class="row row-cols-4 gy-4 gx-4 py-2 h-100 flex-nowrap overflow-auto row_fixed_height w-100">
                  <div class="col" v-for='movie in movies' :key='movie.id'>
                    <div class="card fixed_height">
-                     <img class="fixed_height" v-if="movie.poster_path == null" src="https://picsum.photos/342/" alt="" >
+                     <img class="fixed_height" v-if="movie.poster_path == null" src="https://picsum.photos/342/515" alt="" >
                      <img class="fixed_height" v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
                    </div>
                    <div class="text fixed_height">
@@ -52,13 +51,13 @@
          <div class="mostra_lista pb-4">
               <div class="container">
                 <h2 class="text-center">Serie Tv</h2>
-               <div class="row row-cols-4 gy-4 py-2 flex-nowrap overflow-auto">
+               <div class="row row-cols-4 gy-4 gx-4 py-2 flex-nowrap overflow-auto w-100">
                  <div class="col" v-for='show in shows' :key='show.id'>
                    <div class="card fixed_height">
                      <img class="fixed_height" v-if="show.poster_path == null" src="https://picsum.photos/342/515" alt="" >
                      <img class="fixed_height" v-else :src="'https://image.tmdb.org/t/p/w342/' + show.poster_path" alt="">
                    </div>
-                   <div class="text">
+                   <div class="card text h-100 fixed_height">
                       <div class="title"><strong>Titolo</strong>: {{show.name}} </div>
                       <div class="original_title"><strong>Titolo originale</strong>: {{show.original_name}} </div>
                       <div class="language"><strong>Lingua</strong>: {{show.original_language}}  <flag :iso="languageFlag(show.original_language)" /></div>
@@ -85,12 +84,13 @@
 </template>
 
 <script>
+import LogoComponent from '@/components/LogoComponent.vue'
 import axios from 'axios';
 
 export default {
   name: 'App',
   components: {
-   
+   LogoComponent
   },
   data() {
     return {
@@ -105,23 +105,25 @@ export default {
   methods: {
     callMyApi(){
       axios.get(this.url + this.searchMovie).then(response => {
-        console.log(this);
-        console.log(response);
+        //console.log(this);
+        //console.log(response);
         this.movies = response.data.results
         this.searchMovie= ''
       })
-      .catch(error => {
-        console.log(error);
+      .catch((error) => {
+        //console.log(error);
+        this.error = `Si è verificato un problema: ${error}`;
       }),
 
        axios.get(this.urlTv + this.searchMovie).then(response => {
-        console.log(this);
-        console.log(response);
+        //console.log(this);
+        //console.log(response);
         this.shows = response.data.results
         this.searchMovie= ''
       })
-      .catch(error => {
-        console.log(error);
+      .catch((error) => {
+        //console.log(error);
+        this.error = `Si è verificato un problema: ${error}`;
       })
     },
     languageFlag(flagspeak){
