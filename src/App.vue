@@ -2,7 +2,7 @@
   <div id="app">
     <header id="site_header">
       <nav id="site_nav" class="py_1">
-        <div class="container-fluid bg_black">
+        <div class="container-fluid">
             <div class="row row-cols-2 align-items-center h-100 flex-nowrap">
               <div class="col">
                 <LogoComponent />
@@ -20,17 +20,17 @@
       </nav>
     </header>
 
-    <main id="site_main mb-3">
-         <div class="mostra_lista pb-4">
-             <div class="container">
+    <main id="site_main" class="mb-4">
+         <div class="mostra_lista p-4">
+             <div class="container-fluid"> 
                <h2 class="text-center">Film</h2>
-               <div class="row row-cols-4 gy-4 gx-4 py-2 h-100 flex-nowrap overflow-auto row_fixed_height w-100">
-                 <div class="col" v-for='movie in movies' :key='movie.id'>
-                   <div class="card fixed_height">
-                     <img class="fixed_height" v-if="movie.poster_path == null" src="https://picsum.photos/342/515" alt="" >
-                     <img class="fixed_height" v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
+               <div class="row row-cols-5 pb-2 flex-nowrap overflow-auto">
+                 <div class="col p-0" v-for='movie in movies' :key='movie.id'>
+                   <div class="poster">
+                     <img class="rounded img-fluid"  v-if="movie.poster_path == null" src="https://picsum.photos/342/513" alt="" >
+                     <img class="rounded img-fluid" v-else :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" alt="">
                    </div>
-                   <div class="text fixed_height">
+                   <div class="text">
                       <div class="title"><strong>Titolo</strong>: {{movie.title}} </div>
                       <div class="original_title"><strong>Titolo originale</strong>: {{movie.original_title}} </div>
                       <div class="language"><strong>Lingua</strong>: {{movie.original_language}}  <flag :iso="languageFlag(movie.original_language)" /></div>
@@ -48,16 +48,16 @@
                </div>
              </div>
          </div>
-         <div class="mostra_lista pb-4">
-              <div class="container">
+         <div class="mostra_lista p-4">
+              <div class="container-fluid"> <!-- Container fluid crea problemi con la width della row degli show -->
                 <h2 class="text-center">Serie Tv</h2>
-               <div class="row row-cols-4 gy-4 gx-4 py-2 flex-nowrap overflow-auto w-100">
-                 <div class="col" v-for='show in shows' :key='show.id'>
-                   <div class="card fixed_height">
-                     <img class="fixed_height" v-if="show.poster_path == null" src="https://picsum.photos/342/515" alt="" >
-                     <img class="fixed_height" v-else :src="'https://image.tmdb.org/t/p/w342/' + show.poster_path" alt="">
+               <div class="row row-cols-5 pb-2 flex-nowrap overflow-auto">
+                 <div class="col fixed_height p-0" v-for='show in shows' :key='show.id'>
+                   <div class="poster fixed_height fixed_width">
+                     <img class="rounded img-fluid" v-if="show.poster_path == null" src="https://picsum.photos/342/513" alt="" >
+                     <img class="rounded img-fluid" v-else :src="'https://image.tmdb.org/t/p/w342/' + show.poster_path" alt="">
                    </div>
-                   <div class="card text h-100 fixed_height">
+                   <div class="text fixed_height fixed_width">
                       <div class="title"><strong>Titolo</strong>: {{show.name}} </div>
                       <div class="original_title"><strong>Titolo originale</strong>: {{show.original_name}} </div>
                       <div class="language"><strong>Lingua</strong>: {{show.original_language}}  <flag :iso="languageFlag(show.original_language)" /></div>

@@ -21,21 +21,20 @@ body {
   
   img {
       max-height: 100%;
-      max-width: 100%;
+     /*  aspect-ratio: 1 / 1.5; */
   }
 
   h2 {
-      color: rgba(100, 148, 237, 0.699);
+      color: rgba(24, 70, 156, 0.699);
       margin: 2rem auto;
-      border: 1px solid blue;
-      box-shadow: inset 5px 5px 10px blue;
+      border: 1px solid rgba(100, 148, 237, 0.699);
+      box-shadow: inset 5px 5px 10px rgb(255, 242, 0);
       border-radius: 0.5rem;
       transition: 500ms;
-      
       width: 20%;
       &:hover {
         box-shadow: inset 5px 5px 10px transparent;
-        color: rgb(100, 148, 237);
+        color: rgb(255, 242, 0);
       }
   }
 
@@ -44,16 +43,17 @@ body {
   /* Header */
 
   header {
-    border-bottom: 3px solid cornflowerblue;
+    padding: 0.3rem 0;
+    border-bottom: 4px ridge rgb(255, 234, 0);
     position: sticky;
-    box-shadow: 0 10px 50px blue;
+    box-shadow: 0 10px 30px rgb(255, 242, 0);
     background-image: url('https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
     /* Nav */
-  
+
     input {
       font-size: 13px;
       border: none;
@@ -90,13 +90,13 @@ body {
   /* Main */
 
   main {
-    /* background-image: url('https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg');
+    background-image: url('https://cdn.pixabay.com/photo/2021/01/24/20/21/cloud-5946381_1280.jpg');
     background-size: cover;
-    background-repeat: no-repeat; */
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: black;
-    margin-top: 0.5rem;
-    padding-top: 2rem;
-    padding-bottom: 5rem ;
+    /* padding-top: 2rem; */
+    /* padding-bottom: 5rem ; */
     height: calc(100vh - 55px); 
     overflow:auto;
     &::-webkit-scrollbar {
@@ -104,10 +104,10 @@ body {
       border-radius: 0.5rem; 
     }
     &::-webkit-scrollbar-track {
-      background: cornflowerblue;  
+      background: transparent;  
   }
     &::-webkit-scrollbar-thumb{
-      background-color: blue;  
+      background-color: rgba(25, 25, 188, 0.288);  
       border-radius: 0.5rem;     
   }
 }
@@ -123,7 +123,7 @@ body {
         border-radius: 0.5rem; 
       }
       &::-webkit-scrollbar-track {
-        background: cornflowerblue;  
+        background: transparent;  
     }
       &::-webkit-scrollbar-thumb{
         width: 10%;
@@ -135,32 +135,38 @@ body {
 
   .col {
       transition: 500ms;
+      position: relative;
   }
 
-  .col:hover .card {
-    display: none;
+  .col:hover .poster {
+    display: hidden;
+    position: absolute;
     }
 
-  .card {
-      border: 2px solid blue;
+  .poster {
+      /* border: 1px solid blue; */
       transition: 500ms;  
-      box-shadow: 0 0 25px lightblue;
+       box-shadow: 0 0 20px lightblue;  
+      img {
+        width: 100%;
+        aspect-ratio: 1 / 1.5;
+      }
   }
 
   .text {
     display: none;
     padding: 2rem 1rem;
-    margin: auto;
-    color: white;
+    color: lightblue;
+   /*  border: 1px solid white; */
+    width: 100%;
     height: 100%;
-    border: 2px solid blue;
     border-radius: 0.2rem;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.673);
     transition: 500ms;
     font-size: 12px;
     .overview {
         overflow-y: auto;
-        max-height: 200px;
+        max-height: 150px;
         padding-right: 0.5rem;
         &::-webkit-scrollbar {
             width: 5px; 
@@ -179,7 +185,9 @@ body {
 
   .col:hover .text {
     display: block;
-    box-shadow: 0 0 40px blue;
+    position: absolute;
+    z-index: 2;
+    box-shadow: 0 0 30px blue;
 
   }
   
@@ -196,15 +204,20 @@ body {
       border-radius: 1rem;
   }
 
-  .d-flex {
+/*   .bg_red {
+    background-color: rgba(0, 0, 0, 0.505);
+    border-radius: 1rem;
+  } */
+
+/*   .d-flex {
     display: flex;
-  }
+  } */
   
-  .d_flex {
+/*   .d_flex {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
+  } */
 
   .bg_black {
       background-color: black;
@@ -215,8 +228,12 @@ body {
   }
 
   .fixed_height {
-    height: 100%;
-}
-  .row_fixed_height {
-    height: 440px;
+    height: 364px;
  }
+
+ .fixed_width {
+   width: 243px;
+ }
+/*   .row_fixed_height {
+    height: 440px;
+ } */
